@@ -47,6 +47,11 @@
             <artifactId>biweekly</artifactId>
             <version>0.6.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
     </dependencies>
 
     <build>
