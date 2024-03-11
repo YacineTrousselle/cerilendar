@@ -4,6 +4,7 @@ module fr.ceri.calendar {
 
     requires org.controlsfx.controls;
     requires net.sf.biweekly;
+    requires jbcrypt;
 
     opens fr.ceri.calendar to javafx.fxml;
     exports fr.ceri.calendar;
