@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="fr.ceri.calendar.controller.DayController" alignment="CENTER">
+      fx:controller="fr.ceri.calendar.controller.WeekController" alignment="CENTER">
     <DatePicker fx:id="datePicker"/>
-    <Pane fx:id="eventContainer" maxWidth="-Infinity"/>
+    <HBox fx:id="eventContainer" maxWidth="-Infinity"/>
 </VBox>
