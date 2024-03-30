@@ -21,8 +21,9 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Button button = new Button("Go to daily view");
-        button.setOnAction(event -> MainApplication.setScene("day"));
+        Button button = new Button("Welcome");
+        // TODO: remove debug
+        button.setOnAction(event -> MainApplication.setScene("week"));
 
         content.getChildren().add(button);
     }

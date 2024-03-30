@@ -1,0 +1,26 @@
+.root {
+    -fx-padding: 20;
+    -fx-background-color: #f0f0f0;
+}
+
+.text {
+    -fx-fill: #333;
+}
+
+.button-primary, .button-secondary {
+    -fx-background-radius: 5;
+    -fx-padding: 5 22;
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+}
+
+.button-secondary {
+    -fx-background-color: #28a745;
+}
+
+.text-field, .password-field {
+    -fx-padding: 4 8;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #ccc;
+}

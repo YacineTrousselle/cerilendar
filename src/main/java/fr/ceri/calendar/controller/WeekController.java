@@ -14,11 +14,12 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DayController implements Initializable {
+public class WeekController implements Initializable {
     private final ObjectProperty<LocalDate> localDateObjectProperty = new SimpleObjectProperty<>();
     private List<Event> eventList;
 
@@ -37,7 +38,7 @@ public class DayController implements Initializable {
         }
 
         localDateObjectProperty.addListener((observable, oldValue, newValue) ->
-                buildGrid(EventListBuilder.buildEventListByDay(eventList, newValue))
+                buildGrid(EventListBuilder.buildEventListByWeek(eventList, newValue))
         );
         localDateObjectProperty.set(LocalDate.now());
 
@@ -47,7 +48,19 @@ public class DayController implements Initializable {
 
     private void buildGrid(List<Event> events) {
         eventContainer.getChildren().clear();
-        eventContainer.getChildren().add(new DayComponent(events));
+
+        LocalDate day = localDateObjectProperty.getValue();
+        while (day.getDayOfWeek() != DayOfWeek.MONDAY) {
+            day = day.minusDays(1);
+        }
+        do {
+            eventContainer
+                    .getChildren()
+                    .add(new DayComponent(
+                            EventListBuilder.buildEventListByDay(events, day)
+                    ));
+            day = day.plusDays(1);
+        } while (day.getDayOfWeek() != DayOfWeek.SATURDAY);
     }
 
 }
