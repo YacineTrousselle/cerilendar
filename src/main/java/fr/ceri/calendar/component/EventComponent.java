@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class EventComponent extends Pane {
-    private double PADDING = 2.0;
+    private static final double PADDING = 2.0;
 
     public EventComponent(Event event) {
         setStyle("-fx-background-color: #FFAE42");

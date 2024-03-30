@@ -23,7 +23,7 @@ public class MainController implements Initializable {
 
         Button button = new Button("Welcome");
         // TODO: remove debug
-        button.setOnAction(event -> MainApplication.setScene("week"));
+        button.setOnAction(event -> MainApplication.setScene("month"));
 
         content.getChildren().add(button);
     }
