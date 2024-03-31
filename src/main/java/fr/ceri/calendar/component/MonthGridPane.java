@@ -1,12 +1,15 @@
 package fr.ceri.calendar.component;
 
+import fr.ceri.calendar.MainApplication;
+import fr.ceri.calendar.controller.MainController;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 
 import java.time.DayOfWeek;
@@ -36,7 +39,7 @@ public class MonthGridPane extends GridPane {
         while (date.getMonth() == localDate.getMonth()) {
             DayOfWeek dayOfWeek = date.getDayOfWeek();
             if (dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY) {
-                add(buildDayPane(date.getDayOfMonth()), dayOfWeek.getValue() - 1, row);
+                add(buildDayPane(date), dayOfWeek.getValue() - 1, row);
             }
             if (dayOfWeek == DayOfWeek.FRIDAY) {
                 row++;
@@ -58,14 +61,47 @@ public class MonthGridPane extends GridPane {
         return null;
     }
 
-    private Pane buildDayPane(int day) {
-        VBox pane = new VBox();
+    private Pane buildDayPane(LocalDate date) {
+        int day = date.getDayOfMonth();
+        BorderPane pane = new BorderPane();
+
         pane.setMaxSize(WIDTH, HEIGHT);
         pane.setMinSize(WIDTH, HEIGHT);
-
         pane.setBorder(Border.stroke(Paint.valueOf("black")));
-        pane.getChildren().add(new Label(String.format("%d", day)));
+
+        configureAction(pane, date);
+
+        FlowPane subpane = new FlowPane();
+        subpane.setOrientation(Orientation.HORIZONTAL);
+        subpane.setMaxSize(WIDTH, HEIGHT);
+        subpane.setVgap(2);
+        subpane.setHgap(2);
+        subpane.setPadding(new Insets(2));
+
+        pane.setTop(new Label(String.format("%d", day)));
+        pane.setBottom(subpane);
 
         return pane;
+    }
+
+    private void configureAction(Pane pane, LocalDate localDate) {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem viewDay = new MenuItem("Voir jour");
+        MenuItem viewWeek = new MenuItem("Voir semaine");
+
+        viewDay.setOnAction(event -> {
+            MainController.localDateObjectProperty.setValue(localDate);
+            MainApplication.setScene("day");
+        });
+        viewWeek.setOnAction(event -> {
+            MainController.localDateObjectProperty.setValue(localDate);
+            MainApplication.setScene("week");
+        });
+        contextMenu.getItems().addAll(viewDay, viewWeek);
+        pane.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                contextMenu.show(pane, event.getScreenX(), event.getScreenY());
+            }
+        });
     }
 }

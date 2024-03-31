@@ -4,7 +4,6 @@ import fr.ceri.calendar.MainApplication;
 import fr.ceri.calendar.component.DayComponent;
 import fr.ceri.calendar.entity.Event;
 import fr.ceri.calendar.service.EventListBuilder;
-import fr.ceri.calendar.service.EventService;
 import fr.ceri.calendar.service.IcsParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -64,8 +63,5 @@ public class DayController implements Initializable {
     private void buildGrid(List<Event> events) {
         eventContainer.getChildren().clear();
         eventContainer.getChildren().add(new DayComponent(events));
-        for (Event event : events) {
-            System.out.println(EventService.parseEventSummary(event));
-        }
     }
 }

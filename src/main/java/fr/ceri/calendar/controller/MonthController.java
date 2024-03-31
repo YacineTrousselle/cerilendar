@@ -9,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -30,7 +32,7 @@ public class MonthController implements Initializable {
     private VBox vBox;
 
     @FXML
-    private Pane grid;
+    private StackPane grid;
 
     @FXML
     private DatePicker datePicker;
@@ -76,23 +78,41 @@ public class MonthController implements Initializable {
         for (Event event : events) {
             LocalDate eventLocalDate = LocalDate.ofInstant(event.getStartTime().getValue().toInstant(), ZoneId.of("Europe/Paris"));
 
-            int col = eventLocalDate.getDayOfWeek().getValue() - 1;
-            int row = getRow(eventLocalDate);
+            if (eventLocalDate.getDayOfWeek() != DayOfWeek.SATURDAY && eventLocalDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
+                int col = eventLocalDate.getDayOfWeek().getValue() - 1;
+                int row = getRow(eventLocalDate);
 
-            Pane pane = monthGridPane.getNodeByRowCol(row, col);
-            if (null != pane) {
-                pane.getChildren().add(new Label(eventLocalDate.toString()));
+                Pane pane = monthGridPane.getNodeByRowCol(row, col);
+                if (null != pane) {
+                    Pane subpane = (Pane) pane.getChildren().get(1);
+                    Pane circlePane = buildDayComponent();
+                    subpane.getChildren().add(circlePane);
+
+                }
             }
-
         }
-        grid.getChildren().add(monthGridPane);
+        grid.getChildren().addAll(monthGridPane);
     }
 
     private int getRow(LocalDate date) {
         LocalDate firstOfMonth = LocalDate.of(date.getYear(), date.getMonth(), 1);
-        DayOfWeek firstDayOfWeek = firstOfMonth.getDayOfWeek();
-        int daysUntilDate = firstOfMonth.until(date).getDays();
-        int offset = firstDayOfWeek == DayOfWeek.SUNDAY ? 6 : firstDayOfWeek.getValue() - 1;
-        return (daysUntilDate + offset) / 5 + 1;
+
+        int row = 1;
+        while (firstOfMonth.getDayOfMonth() != date.getDayOfMonth()) {
+            if (firstOfMonth.getDayOfWeek() == DayOfWeek.FRIDAY) {
+                row++;
+            }
+            firstOfMonth = firstOfMonth.plusDays(1);
+        }
+
+        return row;
+    }
+
+    private Pane buildDayComponent() {
+        Pane pane = new VBox();
+        Circle circle = new Circle(6, Color.BLUE);
+        pane.getChildren().addAll(circle);
+
+        return pane;
     }
 }

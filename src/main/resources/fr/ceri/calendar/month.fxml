@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:id="vBox"
       fx:controller="fr.ceri.calendar.controller.MonthController" alignment="CENTER">
     <DatePicker fx:id="datePicker"/>
-    <Pane fx:id="grid"/>
+    <StackPane fx:id="grid"/>
 </VBox>
