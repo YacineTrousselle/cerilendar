@@ -2,6 +2,7 @@ package fr.ceri.calendar;
 
 import fr.ceri.calendar.controller.MainController;
 import fr.ceri.calendar.entity.User;
+import fr.ceri.calendar.entity.UserSettings;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ import java.io.IOException;
 public class MainApplication extends Application {
     private static MainController mainController;
     public static User user = null;
+    public static UserSettings userSettings = null;
 
     @Override
     public void start(Stage stage) throws IOException {

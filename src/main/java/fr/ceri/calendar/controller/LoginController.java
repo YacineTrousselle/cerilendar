@@ -1,7 +1,6 @@
 package fr.ceri.calendar.controller;
 
 import fr.ceri.calendar.MainApplication;
-import fr.ceri.calendar.entity.ColorModeEnum;
 import fr.ceri.calendar.entity.StatusEnum;
 import fr.ceri.calendar.entity.User;
 import fr.ceri.calendar.exception.InvalidPasswordException;
@@ -33,7 +32,6 @@ public class LoginController implements Initializable {
 
     private final ToggleGroup toggleGroup = new ToggleGroup();
 
-
     public LoginController() throws IOException {
     }
 
@@ -44,7 +42,6 @@ public class LoginController implements Initializable {
         password.setDisable(false);
         password.setText("");
 
-
         for (StatusEnum status : StatusEnum.values()) {
             RadioButton radioButton = new RadioButton(status.toFrenchString());
             radioButton.setToggleGroup(toggleGroup);
@@ -52,7 +49,6 @@ public class LoginController implements Initializable {
             statusRadioGroup.getChildren().add(radioButton);
         }
         ((RadioButton) statusRadioGroup.getChildren().getFirst()).setSelected(true);
-
     }
 
     public void handleLogin(ActionEvent actionEvent) {
@@ -82,7 +78,7 @@ public class LoginController implements Initializable {
         password.setDisable(true);
 
         try {
-            User newUser = new User(username.getText(), password.getText(), ColorModeEnum.LIGHTMODE, (StatusEnum) toggleGroup.getSelectedToggle().getUserData());
+            User newUser = new User(username.getText(), password.getText(), (StatusEnum) toggleGroup.getSelectedToggle().getUserData());
             userService.createUser(newUser);
             onSuccess(newUser);
             return;
