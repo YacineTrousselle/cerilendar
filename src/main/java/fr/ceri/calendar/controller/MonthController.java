@@ -1,6 +1,7 @@
 package fr.ceri.calendar.controller;
 
 import fr.ceri.calendar.MainApplication;
+import fr.ceri.calendar.component.EventSummaryComponent;
 import fr.ceri.calendar.component.MonthGridPane;
 import fr.ceri.calendar.entity.Event;
 import fr.ceri.calendar.service.EventListBuilder;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -63,7 +65,6 @@ public class MonthController implements Initializable {
                 );
             }
         });
-        MainController.localDateObjectProperty.setValue(LocalDate.now());
 
         datePicker.setValue(MainController.localDateObjectProperty.getValue());
         datePicker.setOnAction(event -> MainController.localDateObjectProperty.set(datePicker.getValue()));
@@ -85,12 +86,12 @@ public class MonthController implements Initializable {
                 Pane pane = monthGridPane.getNodeByRowCol(row, col);
                 if (null != pane) {
                     Pane subpane = (Pane) pane.getChildren().get(1);
-                    Pane circlePane = buildDayComponent();
+                    Pane circlePane = buildDayComponent(event);
                     subpane.getChildren().add(circlePane);
-
                 }
             }
         }
+
         grid.getChildren().addAll(monthGridPane);
     }
 
@@ -108,10 +109,15 @@ public class MonthController implements Initializable {
         return row;
     }
 
-    private Pane buildDayComponent() {
+    private Pane buildDayComponent(Event event) {
         Pane pane = new VBox();
         Circle circle = new Circle(6, Color.BLUE);
-        pane.getChildren().addAll(circle);
+
+        Tooltip tooltip = new Tooltip();
+        tooltip.setGraphic(new EventSummaryComponent(event));
+        Tooltip.install(circle, tooltip);
+
+        pane.getChildren().add(circle);
 
         return pane;
     }

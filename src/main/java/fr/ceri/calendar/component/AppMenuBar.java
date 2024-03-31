@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 public class AppMenuBar extends MenuBar {
 
     public AppMenuBar() {
+        setVisible(MainApplication.user != null);
         Menu menu = new Menu("Menu");
 
         MenuItem settingsMenuItem = new MenuItem("Paramètres");

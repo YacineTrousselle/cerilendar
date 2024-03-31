@@ -49,6 +49,8 @@ public class SettingsController implements Initializable {
         BorderPane.setAlignment(defaultIcsLabel, Pos.CENTER);
         defaultIcs.setTop(defaultIcsLabel);
 
+        // TODO: selection edt
+
         Button saveButton = new Button("Enregistrer");
 
         vBox.getChildren().addAll(title, radios, defaultIcs, saveButton);
