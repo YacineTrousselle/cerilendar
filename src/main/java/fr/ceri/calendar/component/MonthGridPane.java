@@ -1,13 +1,13 @@
 package fr.ceri.calendar.component;
 
-import fr.ceri.calendar.MainApplication;
-import fr.ceri.calendar.controller.MainController;
+import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
@@ -21,7 +21,12 @@ public class MonthGridPane extends GridPane {
     public final static int WIDTH = 200;
     public final static int HEIGHT = 100;
 
-    public MonthGridPane(LocalDate localDate) {
+    private final ObjectProperty<LocalDate> localDateObjectProperty;
+    private final ToggleGroup viewModeToggleGroup;
+
+    public MonthGridPane(LocalDate localDate, ObjectProperty<LocalDate> localDateObjectProperty, ToggleGroup viewModeToggleGroup) {
+        this.localDateObjectProperty = localDateObjectProperty;
+        this.viewModeToggleGroup = viewModeToggleGroup;
         setPadding(new Insets(10));
         setHgap(10);
         setVgap(10);
@@ -90,12 +95,12 @@ public class MonthGridPane extends GridPane {
         MenuItem viewWeek = new MenuItem("Voir semaine");
 
         viewDay.setOnAction(event -> {
-            MainController.localDateObjectProperty.setValue(localDate);
-            MainApplication.setScene("day");
+            localDateObjectProperty.setValue(localDate);
+            viewModeToggleGroup.selectToggle(viewModeToggleGroup.getToggles().getFirst());
         });
         viewWeek.setOnAction(event -> {
-            MainController.localDateObjectProperty.setValue(localDate);
-            MainApplication.setScene("week");
+            localDateObjectProperty.setValue(localDate);
+            viewModeToggleGroup.selectToggle(viewModeToggleGroup.getToggles().get(1));
         });
         contextMenu.getItems().addAll(viewDay, viewWeek);
         pane.setOnMouseClicked(event -> {

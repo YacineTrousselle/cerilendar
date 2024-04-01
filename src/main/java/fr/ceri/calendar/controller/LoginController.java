@@ -25,10 +25,13 @@ public class LoginController implements Initializable {
 
     @FXML
     public PasswordField password;
+
     @FXML
     public TextField username;
+
     @FXML
     public Label error;
+
     @FXML
     public HBox statusRadioGroup;
 
@@ -121,6 +124,6 @@ public class LoginController implements Initializable {
             MainApplication.userSettings = userSettingsService.findSettingsByUsername(username.getText());
         } catch (Exception e) {
         }
-        MainApplication.setScene("day");
+        MainApplication.setScene("user-calendar");
     }
 }

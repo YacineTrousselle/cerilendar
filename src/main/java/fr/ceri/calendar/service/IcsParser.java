@@ -21,18 +21,14 @@ import java.util.List;
 
 public class IcsParser {
 
-    public static List<VEvent> parseIcsFile(Path filepath) throws URISyntaxException, IllegalArgumentException, IOException {
-        URL url = MainApplication.class.getResource(filepath.toString());
-        if (null == url) {
-            throw new IllegalArgumentException(String.format("File not found at path %s", filepath));
-        }
-        File file = new File(url.toURI());
-
+    public static List<VEvent> parseIcsFile(Path filepath) throws IllegalArgumentException, IOException {
+        File file = new File(filepath.toUri());
         ICalendar iCalendar = Biweekly.parse(file).first();
 
         return iCalendar.getEvents();
     }
 
+    @Deprecated
     public static List<VEvent> parseIcsFile(String filename) throws URISyntaxException, IllegalArgumentException, IOException {
         URL url = MainApplication.class.getResource("ics/" + (filename.endsWith(".ics") ? filename : filename + ".ics"));
         if (null == url) {

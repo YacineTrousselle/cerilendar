@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class EventService {
     private static String TEACHERS_REGEX = "(?:[A-Za-z]+(?:\\s[A-Za-z]+)?(?:,\\s)?)+";
-    private static String[] TYPES = new String[]{"réunion", "entreprise", "voyage", "tp", "td", "occa", "soutenance", "evaluation", "entretien", "conference", "cm"};
+    private static String[] TYPES = new String[]{"réunion", "entreprise", "voyage", "tp", "td", "occa", "soutenance", "evaluation", "entretien", "conf", "cm"};
 
     public static EventSummary parseEventSummary(Event event) {
 
@@ -46,10 +46,10 @@ public class EventService {
 
     private static String getTeachers(List<String> summary) {
         Pattern pattern = Pattern.compile(TEACHERS_REGEX);
-        if (pattern.matcher(summary.getFirst()).matches()) {
-
+        if (!summary.isEmpty() && pattern.matcher(summary.getFirst()).matches()) {
             String teachers = summary.getFirst();
             summary.removeFirst();
+
             return teachers;
         }
         return "";
@@ -64,7 +64,6 @@ public class EventService {
                 return field;
             }
         }
-
         return "";
     }
 }
