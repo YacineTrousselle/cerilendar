@@ -30,7 +30,6 @@ public class MainController implements Initializable {
         main.setTop(new AppMenuBar());
 
         Button button = new Button("Welcome");
-        // TODO: remove debug
         button.setOnAction(event -> MainApplication.setScene("login"));
 
         content.getChildren().add(button);

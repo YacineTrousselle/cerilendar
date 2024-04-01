@@ -46,6 +46,7 @@ public class MainApplication extends Application {
             );
             mainController.setView(fxmlLoader.load());
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
     }
