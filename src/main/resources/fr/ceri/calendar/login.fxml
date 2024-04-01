@@ -10,7 +10,7 @@
     <Text text="Bienvenue" style="-fx-font-size: 24px"/>
     <TextField fx:id="username" promptText="Nom d'utilisateur"/>
     <PasswordField fx:id="password" promptText="Mot de passe"/>
-    <HBox fx:id="statusRadioGroup">
+    <HBox fx:id="statusRadioGroup" alignment="CENTER" spacing="4.0">
     </HBox>
 
     <HBox spacing="15" alignment="center">

@@ -3,11 +3,9 @@ package fr.ceri.calendar.controller;
 import fr.ceri.calendar.MainApplication;
 import fr.ceri.calendar.entity.StatusEnum;
 import fr.ceri.calendar.entity.User;
-import fr.ceri.calendar.entity.UserSettings;
 import fr.ceri.calendar.exception.InvalidPasswordException;
 import fr.ceri.calendar.exception.UserAlreadyExistException;
 import fr.ceri.calendar.exception.UserNotFoundException;
-import fr.ceri.calendar.exception.UserSettingsNotFoundException;
 import fr.ceri.calendar.service.UserService;
 import fr.ceri.calendar.service.UserSettingsService;
 import javafx.event.ActionEvent;
@@ -46,6 +44,9 @@ public class LoginController implements Initializable {
         password.setDisable(false);
         password.setText("");
 
+        username.setOnAction(this::handleLogin);
+        password.setOnAction(this::handleLogin);
+
         for (StatusEnum status : StatusEnum.values()) {
             RadioButton radioButton = new RadioButton(status.toFrenchString());
             radioButton.setToggleGroup(toggleGroup);
@@ -59,6 +60,15 @@ public class LoginController implements Initializable {
         error.setText("");
         username.setDisable(true);
         password.setDisable(true);
+
+        if (username.getText().isEmpty() || password.getText().isEmpty()) {
+            error.setText("Champs vides détectés");
+
+            username.setDisable(false);
+            password.setDisable(false);
+
+            return;
+        }
 
         try {
             userService.checkPassword(username.getText(), password.getText());
@@ -80,6 +90,15 @@ public class LoginController implements Initializable {
         error.setText("");
         username.setDisable(true);
         password.setDisable(true);
+
+        if (username.getText().isEmpty() || password.getText().isEmpty()) {
+            error.setText("Champs vides détectés");
+
+            username.setDisable(false);
+            password.setDisable(false);
+
+            return;
+        }
 
         try {
             User newUser = new User(username.getText(), password.getText(), (StatusEnum) toggleGroup.getSelectedToggle().getUserData());
