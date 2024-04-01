@@ -1,5 +1,7 @@
 package fr.ceri.calendar.entity;
 
+import java.util.Arrays;
+
 public class EventSummary {
     private String course = "";
     private String teachers = "";
@@ -49,12 +51,8 @@ public class EventSummary {
 
     @Override
     public String toString() {
-        return "EventSummary{" +
-                "course='" + course + '\'' +
-                ", teachers='" + teachers + '\'' +
-                ", promotion='" + promotion + '\'' +
-                ", type='" + type + '\'' +
-                ", details='" + details + '\'' +
-                '}';
+        return String.join(" - ", (String[]) Arrays.stream(
+                new String[]{getCourse(), getTeachers(), getPromotion(), getType(), getDetails()}).filter(s -> !s.isEmpty()
+        ).toArray());
     }
 }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="394.0" spacing="4.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <Label text="Nouvel évènement" textAlignment="CENTER">
+        <font>
+            <Font size="26.0" />
+        </font>
+        <VBox.margin>
+            <Insets bottom="12.0" top="12.0" />
+        </VBox.margin>
+    </Label>
+    <DatePicker fx:id="datePicker" />
+    <HBox prefHeight="100.0" prefWidth="200.0">
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="18.0">
+            <Label text="Heure de début" />
+        </VBox>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="18.0">
+            <Label text="Heure de fin" />
+        </VBox>
+    </HBox>
+    <GridPane alignment="TOP_CENTER" prefHeight="223.0" prefWidth="394.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <VBox alignment="CENTER" spacing="4.0" GridPane.columnSpan="2">
+            <Label text="Cours" />
+            <TextArea fx:id="course" />
+            <padding>
+                <Insets left="32.0" right="32.0" />
+            </padding>
+        </VBox>
+        <VBox alignment="CENTER" spacing="4.0" GridPane.rowIndex="1">
+            <Label text="Professeurs" />
+            <TextField fx:id="teachers" />
+            <padding>
+                <Insets left="12.0" right="12.0" />
+            </padding>
+        </VBox>
+        <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label text="Promotion" />
+            <TextField fx:id="promotion" />
+            <padding>
+                <Insets left="12.0" right="12.0" />
+            </padding>
+        </VBox>
+        <VBox alignment="CENTER" GridPane.rowIndex="2">
+            <Label text="Type" />
+            <ChoiceBox fx:id="type" prefWidth="150.0" />
+            <padding>
+                <Insets left="12.0" right="12.0" />
+            </padding>
+        </VBox>
+        <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="Détails" />
+            <TextField fx:id="details" />
+            <padding>
+                <Insets left="12.0" right="12.0" />
+            </padding>
+        </VBox>
+    </GridPane>
+    <VBox alignment="CENTER" spacing="4.0">
+        <Label text="Localisation" />
+        <TextField fx:id="eventLocation" />
+        <padding>
+            <Insets left="12.0" right="12.0" />
+        </padding>
+    </VBox>
+    <Button fx:id="save" mnemonicParsing="false" text="Créer l'évènement" />
+</VBox>

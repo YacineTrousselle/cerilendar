@@ -9,8 +9,16 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class EventService {
-    private static String TEACHERS_REGEX = "(?:[A-Za-z]+(?:\\s[A-Za-z]+)?(?:,\\s)?)+";
+    public static String TEACHERS_REGEX = "(?:[A-Za-z]+(?:\\s[A-Za-z]+)?(?:,\\s)?)+";
     private static String[] TYPES = new String[]{"réunion", "entreprise", "voyage", "tp", "td", "occa", "soutenance", "evaluation", "entretien", "conf", "cm"};
+
+    public static String[] AUTHORIZED_TYPES = new String[]{
+            "CM",
+            "TD",
+            "TP",
+            "Evaluation",
+            "Réunion",
+    };
 
     public static EventSummary parseEventSummary(Event event) {
 
