@@ -1,6 +1,7 @@
 package fr.ceri.calendar.controller;
 
 import fr.ceri.calendar.MainApplication;
+import fr.ceri.calendar.component.AppMenuBar;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -26,14 +27,18 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        main.setTop(new AppMenuBar());
+
         Button button = new Button("Welcome");
         // TODO: remove debug
-        button.setOnAction(event -> MainApplication.setScene("day"));
+        button.setOnAction(event -> MainApplication.setScene("login"));
 
         content.getChildren().add(button);
     }
 
     public void setView(Pane scene) {
+        main.setTop(new AppMenuBar());
+
         content.getChildren().clear();
         content.getChildren().add(scene);
     }

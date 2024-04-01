@@ -2,16 +2,21 @@ package fr.ceri.calendar;
 
 import fr.ceri.calendar.controller.MainController;
 import fr.ceri.calendar.entity.User;
+import fr.ceri.calendar.entity.UserSettings;
+import fr.ceri.calendar.service.IcsManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class MainApplication extends Application {
     private static MainController mainController;
     public static User user = null;
+    public static UserSettings userSettings = null;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,6 +38,9 @@ public class MainApplication extends Application {
 
     public static void setScene(String scene) {
         try {
+            if (!Objects.equals(scene, "login") && userSettings == null) {
+                scene = "settings";
+            }
             FXMLLoader fxmlLoader = new FXMLLoader(
                     MainApplication.class.getResource(String.format("%s.fxml", scene))
             );

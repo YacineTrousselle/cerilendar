@@ -1,13 +1,13 @@
 package fr.ceri.calendar.controller;
 
 import fr.ceri.calendar.MainApplication;
-import fr.ceri.calendar.entity.ColorModeEnum;
 import fr.ceri.calendar.entity.StatusEnum;
 import fr.ceri.calendar.entity.User;
 import fr.ceri.calendar.exception.InvalidPasswordException;
 import fr.ceri.calendar.exception.UserAlreadyExistException;
 import fr.ceri.calendar.exception.UserNotFoundException;
 import fr.ceri.calendar.service.UserService;
+import fr.ceri.calendar.service.UserSettingsService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +20,8 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
+    private final UserSettingsService userSettingsService = new UserSettingsService();
 
     @FXML
     public PasswordField password;
@@ -33,7 +34,6 @@ public class LoginController implements Initializable {
 
     private final ToggleGroup toggleGroup = new ToggleGroup();
 
-
     public LoginController() throws IOException {
     }
 
@@ -44,6 +44,8 @@ public class LoginController implements Initializable {
         password.setDisable(false);
         password.setText("");
 
+        username.setOnAction(this::handleLogin);
+        password.setOnAction(this::handleLogin);
 
         for (StatusEnum status : StatusEnum.values()) {
             RadioButton radioButton = new RadioButton(status.toFrenchString());
@@ -52,13 +54,21 @@ public class LoginController implements Initializable {
             statusRadioGroup.getChildren().add(radioButton);
         }
         ((RadioButton) statusRadioGroup.getChildren().getFirst()).setSelected(true);
-
     }
 
     public void handleLogin(ActionEvent actionEvent) {
         error.setText("");
         username.setDisable(true);
         password.setDisable(true);
+
+        if (username.getText().isEmpty() || password.getText().isEmpty()) {
+            error.setText("Champs vides détectés");
+
+            username.setDisable(false);
+            password.setDisable(false);
+
+            return;
+        }
 
         try {
             userService.checkPassword(username.getText(), password.getText());
@@ -81,8 +91,17 @@ public class LoginController implements Initializable {
         username.setDisable(true);
         password.setDisable(true);
 
+        if (username.getText().isEmpty() || password.getText().isEmpty()) {
+            error.setText("Champs vides détectés");
+
+            username.setDisable(false);
+            password.setDisable(false);
+
+            return;
+        }
+
         try {
-            User newUser = new User(username.getText(), password.getText(), ColorModeEnum.LIGHTMODE, (StatusEnum) toggleGroup.getSelectedToggle().getUserData());
+            User newUser = new User(username.getText(), password.getText(), (StatusEnum) toggleGroup.getSelectedToggle().getUserData());
             userService.createUser(newUser);
             onSuccess(newUser);
             return;
@@ -98,6 +117,10 @@ public class LoginController implements Initializable {
 
     private void onSuccess(User user) {
         MainApplication.user = user;
+        try {
+            MainApplication.userSettings = userSettingsService.findSettingsByUsername(username.getText());
+        } catch (Exception e) {
+        }
         MainApplication.setScene("day");
     }
 }

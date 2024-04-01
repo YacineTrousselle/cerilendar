@@ -2,25 +2,24 @@ package fr.ceri.calendar.entity;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.Arrays;
+
 public class User {
 
     private String username;
     private String password;
-    private ColorModeEnum colorMode;
     private StatusEnum status;
 
-    public User(String username, String password, ColorModeEnum colorMode, StatusEnum status) {
+    public User(String username, String password, StatusEnum status) {
         this.username = username;
         this.password = password;
-        this.colorMode = colorMode;
         this.status = status;
     }
 
     public User(String[] userInfo) {
         username = userInfo[0];
         password = userInfo[1];
-        colorMode = ColorModeEnum.valueOf(userInfo[2]);
-        status = StatusEnum.valueOf(userInfo[3]);
+        status = StatusEnum.valueOf(userInfo[2]);
     }
 
     public String getUsername() {
@@ -39,14 +38,6 @@ public class User {
         this.password = password;
     }
 
-    public ColorModeEnum getColorMode() {
-        return colorMode;
-    }
-
-    public void setColorMode(ColorModeEnum colorMode) {
-        this.colorMode = colorMode;
-    }
-
     public StatusEnum getStatus() {
         return status;
     }
@@ -61,6 +52,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("%s;%s;%s;%s\n", username, password, colorMode, status);
+        return String.format("%s;%s;%s\n", username, password, status);
     }
 }
