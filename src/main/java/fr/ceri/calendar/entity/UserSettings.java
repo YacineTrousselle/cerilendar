@@ -35,6 +35,6 @@ public class UserSettings {
 
     @Override
     public String toString() {
-        return String.format("%s%s%s\n", user.getUsername(), colorMode, baseEdt);
+        return String.format("%s;%s;%s\n", user.getUsername(), colorMode, baseEdt);
     }
 }

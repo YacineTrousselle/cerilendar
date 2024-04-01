@@ -10,7 +10,6 @@ public class EventSummaryComponent extends VBox {
 
     public EventSummaryComponent(Event event) {
         EventSummary eventSummary = EventService.parseEventSummary(event);
-//        setStyle("-fx-background-color: #FFAE42");
 
         getChildren().add(new Label(eventSummary.getCourse()));
         if (!eventSummary.getTeachers().isEmpty()) {

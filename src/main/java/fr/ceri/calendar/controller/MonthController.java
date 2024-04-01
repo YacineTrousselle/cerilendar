@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MonthController implements Initializable {
+    public static final int RADIUS = 10;
     private List<Event> eventList;
 
     @FXML
@@ -111,7 +112,7 @@ public class MonthController implements Initializable {
 
     private Pane buildDayComponent(Event event) {
         Pane pane = new VBox();
-        Circle circle = new Circle(6, Color.BLUE);
+        Circle circle = new Circle(RADIUS, Color.BLUE);
 
         Tooltip tooltip = new Tooltip();
         tooltip.setGraphic(new EventSummaryComponent(event));

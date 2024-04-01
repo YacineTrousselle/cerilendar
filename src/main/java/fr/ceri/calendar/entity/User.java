@@ -2,6 +2,8 @@ package fr.ceri.calendar.entity;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.Arrays;
+
 public class User {
 
     private String username;

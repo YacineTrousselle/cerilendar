@@ -45,14 +45,13 @@ public class UserSettingsService {
         for (int i = 0; i < userSettingsLines.size(); i++) {
             String line = userSettingsLines.get(i);
             if (line.split(";")[0].equals(userSettings.getUser().getUsername())) {
-                userSettingsLines.set(i, userSettings.toString());
+                userSettingsLines.set(i, userSettings.toString().replace("\n", ""));
                 Files.write(Path.of(FILEPATH), userSettingsLines);
                 return;
             }
         }
 
         Files.writeString(Path.of(FILEPATH), userSettings.toString(), CREATE, APPEND);
-
     }
 
     private UserSettings getUserSettings(String line) throws UserNotFoundException, IOException {

@@ -31,7 +31,7 @@ public class MainController implements Initializable {
 
         Button button = new Button("Welcome");
         // TODO: remove debug
-        button.setOnAction(event -> MainApplication.setScene("day"));
+        button.setOnAction(event -> MainApplication.setScene("login"));
 
         content.getChildren().add(button);
     }

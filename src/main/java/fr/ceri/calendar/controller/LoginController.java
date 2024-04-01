@@ -3,10 +3,13 @@ package fr.ceri.calendar.controller;
 import fr.ceri.calendar.MainApplication;
 import fr.ceri.calendar.entity.StatusEnum;
 import fr.ceri.calendar.entity.User;
+import fr.ceri.calendar.entity.UserSettings;
 import fr.ceri.calendar.exception.InvalidPasswordException;
 import fr.ceri.calendar.exception.UserAlreadyExistException;
 import fr.ceri.calendar.exception.UserNotFoundException;
+import fr.ceri.calendar.exception.UserSettingsNotFoundException;
 import fr.ceri.calendar.service.UserService;
+import fr.ceri.calendar.service.UserSettingsService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +22,8 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
+    private final UserSettingsService userSettingsService = new UserSettingsService();
 
     @FXML
     public PasswordField password;
@@ -94,6 +98,10 @@ public class LoginController implements Initializable {
 
     private void onSuccess(User user) {
         MainApplication.user = user;
+        try {
+            MainApplication.userSettings = userSettingsService.findSettingsByUsername(username.getText());
+        } catch (Exception e) {
+        }
         MainApplication.setScene("day");
     }
 }
