@@ -1,12 +1,13 @@
 package fr.ceri.calendar.service;
 
+import biweekly.Biweekly;
+import biweekly.ICalendar;
 import biweekly.component.VEvent;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +30,26 @@ public class IcsManager {
         }
         if (Files.notExists(Path.of(ICS_FOLDER, USERS))) {
             Path.of(ICS_FOLDER, USERS).toFile().mkdirs();
+        }
+    }
+
+    public void addVEventForUser(String username, VEvent vEvent) {
+        Path filepath = Path.of(ICS_FOLDER, USERS, username.endsWith(".ics") ? username : username + ".ics");
+
+        try {
+            if (!filepath.toFile().exists()) {
+                ICalendar iCalendar = new ICalendar();
+                iCalendar.addEvent(vEvent);
+                Files.createFile(filepath);
+                Biweekly.write(iCalendar).go(filepath.toFile());
+                return;
+            }
+
+            ICalendar iCalendar = Biweekly.parse(filepath.toFile()).first();
+            iCalendar.addEvent(vEvent);
+            Biweekly.write(iCalendar).go(filepath.toFile());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -87,7 +108,8 @@ public class IcsManager {
                 .map(Objects::toString)
                 .map(filename -> {
                     int lastDotIndex = filename.lastIndexOf('.');
-                    return (lastDotIndex == -1) ? filename : filename.substring(0, lastDotIndex);                })
+                    return (lastDotIndex == -1) ? filename : filename.substring(0, lastDotIndex);
+                })
                 .toList();
 
     }

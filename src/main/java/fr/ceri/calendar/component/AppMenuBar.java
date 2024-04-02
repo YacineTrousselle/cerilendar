@@ -14,7 +14,10 @@ public class AppMenuBar extends MenuBar {
         MenuItem settingsMenuItem = new MenuItem("Paramètres");
         settingsMenuItem.setOnAction(event -> MainApplication.setScene("settings"));
 
-        menu.getItems().addAll(settingsMenuItem);
+        MenuItem createEventMenuItem = new MenuItem("Créer un évènement");
+        createEventMenuItem.setOnAction(event -> MainApplication.setScene("create-event"));
+
+        menu.getItems().addAll(settingsMenuItem, createEventMenuItem);
 
         getMenus().add(menu);
     }
