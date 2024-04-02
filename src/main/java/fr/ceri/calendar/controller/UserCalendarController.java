@@ -75,6 +75,9 @@ public class UserCalendarController implements Initializable {
     }
 
     public void handleSwitchView(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+        if (newValue == null) {
+            return;
+        }
         switch (((ToggleButton) newValue).getText()) {
             case "Jour":
                 borderPane.setCenter(new DayComponent(EventListBuilder.buildEventListByDay(events, localDateObjectProperty.getValue())));

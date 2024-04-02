@@ -1,6 +1,6 @@
 package fr.ceri.calendar.entity;
 
-import java.util.Arrays;
+import java.util.StringJoiner;
 
 public class EventSummary {
     private String course = "";
@@ -49,10 +49,34 @@ public class EventSummary {
         this.details = details;
     }
 
+//    @Override
+//    public String toString() {
+//        return String.join(" - ", (String[]) Arrays.stream(
+//                new String[]{getCourse(), getTeachers(), getPromotion(), getType(), getDetails()}).filter(
+//                        s -> null != s && !s.isEmpty()
+//        ).toArray());
+//    }
+
+
     @Override
     public String toString() {
-        return String.join(" - ", (String[]) Arrays.stream(
-                new String[]{getCourse(), getTeachers(), getPromotion(), getType(), getDetails()}).filter(s -> !s.isEmpty()
-        ).toArray());
+        StringJoiner joiner = new StringJoiner(" - ");
+        if (!course.isEmpty()) {
+            joiner.add(course);
+        }
+        if (!teachers.isEmpty()) {
+            joiner.add(teachers);
+        }
+        if (!promotion.isEmpty()) {
+            joiner.add(promotion);
+        }
+        if (!type.isEmpty()) {
+            joiner.add(type);
+        }
+        if (!details.isEmpty()) {
+            joiner.add(details);
+        }
+
+        return joiner.toString();
     }
 }
