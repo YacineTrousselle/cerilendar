@@ -34,7 +34,9 @@ public class EventComponent extends Pane {
             setMinHeight(DayComponent.ROW_HEIGHT * halfHoursDuration - PADDING);
             setMaxHeight(DayComponent.ROW_HEIGHT * halfHoursDuration - PADDING);
         }
-        Label label = new Label(event.getSummary().getValue() + "\n" + event.getLocation().getValue());
+        Label label = new Label(event.getSummary().getValue() + (
+                null != event.getLocation() ? "\n" + event.getLocation().getValue() : ""
+        ));
         label.setWrapText(true);
         label.setMaxWidth(DayComponent.EVENT_WIDTH);
 

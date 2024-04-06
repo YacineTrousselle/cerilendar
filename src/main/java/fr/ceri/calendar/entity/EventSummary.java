@@ -49,15 +49,6 @@ public class EventSummary {
         this.details = details;
     }
 
-//    @Override
-//    public String toString() {
-//        return String.join(" - ", (String[]) Arrays.stream(
-//                new String[]{getCourse(), getTeachers(), getPromotion(), getType(), getDetails()}).filter(
-//                        s -> null != s && !s.isEmpty()
-//        ).toArray());
-//    }
-
-
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(" - ");
