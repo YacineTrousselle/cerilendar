@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class IcsManager {
-    public static String ICS_FOLDER = "ics";
-    public static String FORMATIONS = "formations";
-    public static String TEACHERS = "teachers";
-    public static String LOCATION = "locations";
-    public static String USERS = "users";
+    public static final String ICS_FOLDER = "ics";
+    public static final String FORMATIONS = "formations";
+    public static final String TEACHERS = "teachers";
+    public static final String LOCATION = "locations";
+    public static final String USERS = "users";
 
     public IcsManager() {
         if (Files.notExists(Path.of(ICS_FOLDER, FORMATIONS))) {

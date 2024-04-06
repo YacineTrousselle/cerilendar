@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane prefHeight="205.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ceri.calendar.controller.CalendarByTypeController">
+
+    <top>
+        <HBox spacing="8.0" alignment="CENTER" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="16"/>
+            </padding>
+            <ComboBox fx:id="type" />
+            <ComboBox fx:id="name" visible="false" />
+            <DatePicker fx:id="datepicker" visible="false" />
+        </HBox>
+    </top>
+
+    <center>
+        <StackPane fx:id="calendar" visible="false" />
+    </center>
+
+</BorderPane>

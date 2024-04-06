@@ -17,9 +17,11 @@ public class AppMenuBar extends MenuBar {
         MenuItem createEventMenuItem = new MenuItem("Créer un évènement");
         createEventMenuItem.setOnAction(event -> MainApplication.setScene("create-event"));
 
-        menu.getItems().addAll(settingsMenuItem, createEventMenuItem);
+        MenuItem searchMenuItem = new MenuItem("Recherche");
+        searchMenuItem.setOnAction(event -> MainApplication.setScene("calendar-by-type"));
+
+        menu.getItems().addAll(settingsMenuItem, createEventMenuItem, searchMenuItem);
 
         getMenus().add(menu);
     }
-
 }
