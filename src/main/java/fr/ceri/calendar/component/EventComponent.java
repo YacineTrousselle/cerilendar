@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 
-
 public class EventComponent extends Pane {
     private static final double PADDING = 2.0;
 
@@ -35,7 +34,7 @@ public class EventComponent extends Pane {
             setMinHeight(DayComponent.ROW_HEIGHT * halfHoursDuration - PADDING);
             setMaxHeight(DayComponent.ROW_HEIGHT * halfHoursDuration - PADDING);
         }
-        Label label = new Label(event.getSummary().getValue());
+        Label label = new Label(event.getSummary().getValue() + "\n" + event.getLocation().getValue());
         label.setWrapText(true);
         label.setMaxWidth(DayComponent.EVENT_WIDTH);
 
