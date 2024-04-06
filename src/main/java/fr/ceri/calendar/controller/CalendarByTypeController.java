@@ -54,7 +54,7 @@ public class CalendarByTypeController implements Initializable {
                     default -> throw new IllegalStateException("Unexpected value: " + type.getValue());
                 });
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                System.err.println("type.setOnAction: " + e.getMessage());
             }
             name.setVisible(true);
             datepicker.setVisible(false);
@@ -64,20 +64,22 @@ public class CalendarByTypeController implements Initializable {
 
         name.setOnAction(event -> {
             List<VEvent> vEvents = new ArrayList<>();
-            try {
-                vEvents = switch (type.getValue()) {
-                    case IcsManager.FORMATIONS -> icsManager.getFormation(name.getValue());
-                    case IcsManager.TEACHERS -> icsManager.getTeacher(name.getValue());
-                    case IcsManager.LOCATION -> icsManager.getLocation(name.getValue());
-                    default -> throw new IllegalStateException("Unexpected value: " + type.getValue());
-                };
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
+            if (name.getValue() != null) {
+                try {
+                    vEvents = switch (type.getValue()) {
+                        case IcsManager.FORMATIONS -> icsManager.getFormation(name.getValue());
+                        case IcsManager.TEACHERS -> icsManager.getTeacher(name.getValue());
+                        case IcsManager.LOCATION -> icsManager.getLocation(name.getValue());
+                        default -> throw new IllegalStateException("Unexpected value: " + type.getValue());
+                    };
+                } catch (Exception e) {
+                    System.err.println("name.setOnAction: " + e.getMessage());
+                }
+                events = EventListBuilder.buildEvents(vEvents);
+                localDateObjectProperty.setValue(LocalDate.now());
+                datepicker.setVisible(true);
+                calendar.setVisible(true);
             }
-            events = EventListBuilder.buildEvents(vEvents);
-
-            datepicker.setVisible(true);
-            calendar.setVisible(true);
         });
 
         localDateObjectProperty.addListener((observable, oldValue, newValue) -> {
@@ -88,6 +90,5 @@ public class CalendarByTypeController implements Initializable {
                 calendar.getChildren().set(0, new WeekComponent(EventListBuilder.buildEventListByWeek(events, localDateObjectProperty.getValue()), localDateObjectProperty.getValue()));
             }
         });
-
     }
 }

@@ -20,7 +20,7 @@ public class EventComponent extends Pane {
     private static final double PADDING = 2.0;
 
     public EventComponent(Event event) {
-        setStyle("-fx-background-color: #FFAE42");
+        getStyleClass().add("event");
         setMinWidth(DayComponent.EVENT_WIDTH - (PADDING * 2));
         setMaxWidth(DayComponent.EVENT_WIDTH - (PADDING * 2));
         setPrefWidth(DayComponent.EVENT_WIDTH - (PADDING * 2));

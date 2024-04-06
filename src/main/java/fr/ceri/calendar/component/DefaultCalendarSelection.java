@@ -6,10 +6,7 @@ import fr.ceri.calendar.entity.UserSettings;
 import fr.ceri.calendar.service.IcsManager;
 import fr.ceri.calendar.service.IcsParser;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -23,7 +20,7 @@ import static fr.ceri.calendar.MainApplication.ICS_FOLDER;
 
 public class DefaultCalendarSelection extends VBox {
 
-    private ChoiceBox<String> choiceBox = new ChoiceBox<>();
+    private ComboBox<String> choiceBox = new ComboBox<>();
 
     public DefaultCalendarSelection(UserSettings userSettings) {
         setAlignment(Pos.CENTER);
@@ -76,7 +73,7 @@ public class DefaultCalendarSelection extends VBox {
         return saveNewIcs;
     }
 
-    public ChoiceBox<String> getChoiceBox() {
+    public ComboBox<String> getChoiceBox() {
         return choiceBox;
     }
 }

@@ -77,7 +77,6 @@ public class SettingsController implements Initializable {
         BorderPane.setAlignment(defaultIcsLabel, Pos.CENTER);
         defaultIcs.setTop(defaultIcsLabel);
 
-
         DefaultCalendarSelection defaultCalendarSelection = new DefaultCalendarSelection(userSettings);
 
         Button saveButton = new Button("Enregistrer");

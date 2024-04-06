@@ -59,7 +59,8 @@ public class MonthComponent extends StackPane {
 
     private Pane buildDayComponent(Event event) {
         Pane pane = new VBox();
-        Circle circle = new Circle(RADIUS, Color.BLUE);
+        Circle circle = new Circle(RADIUS);
+        circle.getStyleClass().add("circle");
 
         Tooltip tooltip = new Tooltip();
         tooltip.setGraphic(new EventSummaryComponent(event));
