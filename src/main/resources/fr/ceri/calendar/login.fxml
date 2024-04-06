@@ -7,11 +7,10 @@
 <VBox fx:controller="fr.ceri.calendar.controller.LoginController" maxWidth="300"
       xmlns:fx="http://javafx.com/fxml" spacing="10" alignment="center" stylesheets="@style/login.css">
 
+    <HBox fx:id="statusRadioGroup" alignment="CENTER" spacing="4.0"/>
     <Text text="Bienvenue" style="-fx-font-size: 24px"/>
     <TextField fx:id="username" promptText="Nom d'utilisateur"/>
     <PasswordField fx:id="password" promptText="Mot de passe"/>
-    <HBox fx:id="statusRadioGroup" alignment="CENTER" spacing="4.0">
-    </HBox>
 
     <HBox spacing="15" alignment="center">
         <Button text="Se connecter" onAction="#handleLogin" styleClass="button-primary"/>

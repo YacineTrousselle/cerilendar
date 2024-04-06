@@ -122,6 +122,9 @@ public class LoginController implements Initializable {
         MainApplication.user = user;
         try {
             MainApplication.userSettings = userSettingsService.findSettingsByUsername(username.getText());
+            if (null != MainApplication.userSettings) {
+                MainApplication.setColorMode(MainApplication.userSettings.getColorMode());
+            }
         } catch (Exception e) {
         }
         MainApplication.setScene("user-calendar");

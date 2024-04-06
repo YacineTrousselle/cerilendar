@@ -11,8 +11,9 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 
+import static fr.ceri.calendar.MainApplication.ICS_FOLDER;
+
 public class IcsManager {
-    public static final String ICS_FOLDER = "ics";
     public static final String FORMATIONS = "formations";
     public static final String TEACHERS = "teachers";
     public static final String LOCATION = "locations";

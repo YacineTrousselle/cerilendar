@@ -1,0 +1,52 @@
+
+.light {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+}
+
+.dark {
+    -fx-background-color: #333;
+}
+
+.dark .label {
+    -fx-text-fill: #fff;
+}
+
+.dark .button {
+    -fx-background-color: #555;
+    -fx-text-fill: #fff;
+}
+
+.dark .radio-button {
+    -fx-background-color: #333;
+    -fx-text-fill: #fff;
+}
+
+/* outer combo-box text */
+.dark .combo-box .list-cell {
+    -fx-background-color: #555;
+    -fx-text-fill: #ccc;
+}
+
+/* combo-box list view text, not hovered or focused */
+.dark .combo-box .list-view .list-cell {
+    -fx-text-fill: #ccc;
+    -fx-background-color: #555;
+}
+
+/* combo-box selected text */
+.dark .combo-box .list-view .list-cell:focused {
+    -fx-background-color: #555;
+    -fx-text-fill: #ccc;
+}
+
+/* combo-box hover text */
+.dark .combo-box .list-view .list-cell:hover {
+    -fx-background-color: #555;
+    -fx-text-fill: #ccc;
+}
+
+.dark .border-pane {
+    -fx-border-color: #555;
+    -fx-border-width: 1px;
+}

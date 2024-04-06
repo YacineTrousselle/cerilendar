@@ -91,6 +91,7 @@ public class SettingsController implements Initializable {
                 try {
                     userSettingsService.saveSettings(newUserSettings);
                     MainApplication.userSettings = newUserSettings;
+                    MainApplication.setColorMode(newUserSettings.getColorMode());
                     MainApplication.setScene("user-calendar");
                 } catch (IOException e) {
                     System.err.println(e.getMessage());

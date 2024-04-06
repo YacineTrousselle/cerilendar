@@ -1,19 +1,20 @@
 package fr.ceri.calendar;
 
 import fr.ceri.calendar.controller.MainController;
+import fr.ceri.calendar.entity.ColorModeEnum;
 import fr.ceri.calendar.entity.User;
 import fr.ceri.calendar.entity.UserSettings;
-import fr.ceri.calendar.service.IcsManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class MainApplication extends Application {
+    public static final String ICS_FOLDER = "ics";
+
     private static MainController mainController;
     public static User user = null;
     public static UserSettings userSettings = null;
@@ -49,5 +50,14 @@ public class MainApplication extends Application {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    public static void setColorMode(ColorModeEnum colorMode) {
+        mainController.setClassMain(
+                switch (colorMode) {
+                    case DARKMODE -> "dark";
+                    case LIGHTMODE -> "light";
+                }
+        );
     }
 }

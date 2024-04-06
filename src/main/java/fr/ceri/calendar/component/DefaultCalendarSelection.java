@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static fr.ceri.calendar.MainApplication.ICS_FOLDER;
+
 public class DefaultCalendarSelection extends VBox {
 
     private ChoiceBox<String> choiceBox = new ChoiceBox<>();
@@ -60,8 +62,8 @@ public class DefaultCalendarSelection extends VBox {
                     IcsParser.saveIcsFromUrl(
                             urlTextField.getText(),
                             MainApplication.user.getStatus() == StatusEnum.TEACHER
-                                    ? Path.of(IcsManager.ICS_FOLDER, IcsManager.TEACHERS, nameTextField.getText() + ".ics")
-                                    : Path.of(IcsManager.ICS_FOLDER, IcsManager.FORMATIONS, nameTextField.getText() + ".ics")
+                                    ? Path.of(ICS_FOLDER, IcsManager.TEACHERS, nameTextField.getText() + ".ics")
+                                    : Path.of(ICS_FOLDER, IcsManager.FORMATIONS, nameTextField.getText() + ".ics")
                     );
                     choiceBox.getItems().add(nameTextField.getText());
                     choiceBox.getSelectionModel().select(nameTextField.getText());
