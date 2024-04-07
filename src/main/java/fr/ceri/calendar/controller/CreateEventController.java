@@ -32,7 +32,7 @@ public class CreateEventController implements Initializable {
     private TextField promotion;
 
     @FXML
-    private ChoiceBox<String> type;
+    private ComboBox<String> type;
 
     @FXML
     private TextField details;
@@ -44,10 +44,10 @@ public class CreateEventController implements Initializable {
     private Button save;
 
     @FXML
-    private ChoiceBox<String> startTime;
+    private ComboBox<String> startTime;
 
     @FXML
-    private ChoiceBox<String> endTime;
+    private ComboBox<String> endTime;
 
     @FXML
     private Label error;

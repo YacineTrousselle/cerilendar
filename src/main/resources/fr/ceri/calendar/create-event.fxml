@@ -19,11 +19,11 @@
     <HBox prefHeight="100.0" prefWidth="200.0">
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="18.0">
             <Label text="Heure de début"/>
-            <ChoiceBox fx:id="startTime"/>
+            <ComboBox fx:id="startTime"/>
         </VBox>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="18.0">
             <Label text="Heure de fin"/>
-            <ChoiceBox fx:id="endTime"/>
+            <ComboBox fx:id="endTime"/>
         </VBox>
     </HBox>
     <GridPane alignment="TOP_CENTER" prefHeight="223.0" prefWidth="394.0">
@@ -59,7 +59,7 @@
         </VBox>
         <VBox alignment="CENTER" GridPane.rowIndex="2">
             <Label text="Type"/>
-            <ChoiceBox fx:id="type" prefWidth="150.0"/>
+            <ComboBox fx:id="type" prefWidth="150.0"/>
             <padding>
                 <Insets left="12.0" right="12.0"/>
             </padding>

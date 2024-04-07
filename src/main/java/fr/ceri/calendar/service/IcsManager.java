@@ -54,6 +54,18 @@ public class IcsManager {
         }
     }
 
+    public void addVEventForLocation(String room, VEvent vEvent) {
+        Path filepath = Path.of(ICS_FOLDER, LOCATION, room.endsWith(".ics") ? room : room + ".ics");
+
+        try {
+            ICalendar iCalendar = Biweekly.parse(filepath.toFile()).first();
+            iCalendar.addEvent(vEvent);
+            Biweekly.write(iCalendar).go(filepath.toFile());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<VEvent> getFormation(String name) throws URISyntaxException, IOException {
         Path filepath = Path.of(ICS_FOLDER, FORMATIONS, name.endsWith(".ics") ? name : name + ".ics");
 

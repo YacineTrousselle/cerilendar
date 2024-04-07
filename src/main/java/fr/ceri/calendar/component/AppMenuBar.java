@@ -1,6 +1,7 @@
 package fr.ceri.calendar.component;
 
 import fr.ceri.calendar.MainApplication;
+import fr.ceri.calendar.entity.StatusEnum;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -25,6 +26,16 @@ public class AppMenuBar extends MenuBar {
 
         menu.getItems().addAll(userCalendarMenuItem, settingsMenuItem, createEventMenuItem, searchMenuItem);
 
-        getMenus().add(menu);
+        if (null != MainApplication.user && MainApplication.user.getStatus() == StatusEnum.TEACHER) {
+            Menu teacherMenu = new Menu("Action professeur");
+
+            MenuItem roomBookingMenuItem = new MenuItem("Réserver une salle");
+            roomBookingMenuItem.setOnAction(event -> MainApplication.setScene("room-booking"));
+
+            teacherMenu.getItems().addAll(roomBookingMenuItem);
+            getMenus().addLast(teacherMenu);
+        }
+
+        getMenus().addFirst(menu);
     }
 }
