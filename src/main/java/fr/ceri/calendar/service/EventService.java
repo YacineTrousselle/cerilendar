@@ -2,9 +2,11 @@ package fr.ceri.calendar.service;
 
 import fr.ceri.calendar.entity.Event;
 import fr.ceri.calendar.entity.EventSummary;
+import fr.ceri.calendar.entity.Filter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -37,6 +39,37 @@ public class EventService {
         }
 
         return eventSummary;
+    }
+
+    public static HashMap<Filter.FilterType, List<String>> getAllFilters(List<Event> events) {
+        HashMap<Filter.FilterType, List<String>> filters = new HashMap<>();
+        filters.put(Filter.FilterType.LOCATION, new ArrayList<>());
+        filters.put(Filter.FilterType.COURSE, new ArrayList<>());
+        filters.put(Filter.FilterType.TEACHER, new ArrayList<>());
+        filters.put(Filter.FilterType.TYPE, new ArrayList<>());
+
+        for (Event event : events) {
+            if (null != event.getLocation() && !filters.get(Filter.FilterType.LOCATION).contains(event.getLocation().getValue())) {
+                filters.get(Filter.FilterType.LOCATION).add(event.getLocation().getValue());
+            }
+            EventSummary eventSummary = parseEventSummary(event);
+            if (!eventSummary.getCourse().isEmpty() && !filters.get(Filter.FilterType.COURSE).contains(eventSummary.getCourse())) {
+                filters.get(Filter.FilterType.COURSE).add(eventSummary.getCourse());
+            }
+            if (!eventSummary.getType().isEmpty() && !filters.get(Filter.FilterType.TYPE).contains(eventSummary.getType())) {
+                filters.get(Filter.FilterType.TYPE).add(eventSummary.getType());
+            }
+            if (!eventSummary.getTeachers().isEmpty()) {
+                List<String> teachers = Arrays.stream(eventSummary.getTeachers().split(", ")).toList();
+                for (String teacher : teachers) {
+                    if (!filters.get(Filter.FilterType.TEACHER).contains(teacher)) {
+                        filters.get(Filter.FilterType.TEACHER).add(teacher);
+                    }
+                }
+            }
+        }
+
+        return filters;
     }
 
     private static String getType(List<String> summary) {

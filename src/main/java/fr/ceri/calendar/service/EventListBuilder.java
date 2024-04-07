@@ -2,6 +2,7 @@ package fr.ceri.calendar.service;
 
 import biweekly.component.VEvent;
 import fr.ceri.calendar.entity.Event;
+import fr.ceri.calendar.entity.Filter;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
@@ -38,6 +39,19 @@ public class EventListBuilder {
         return events.stream()
                 .filter(event -> compareLocalDateToCalendarMonth(localDate, event.getStartCalendar()))
                 .collect(Collectors.toList());
+    }
+
+    public static List<Event> filterEvents(List<Event> events, Filter filter) {
+        return events.stream().filter(
+                event ->
+                        switch (filter.type()) {
+                            case LOCATION -> event.getLocation().getValue().equals(filter.value());
+                            case COURSE -> EventService.parseEventSummary(event).getCourse().equals(filter.value());
+                            case TEACHER ->
+                                    EventService.parseEventSummary(event).getTeachers().contains(filter.value());
+                            case TYPE -> EventService.parseEventSummary(event).getType().equals(filter.value());
+                        }
+        ).collect(Collectors.toList());
     }
 
     private static boolean compareLocalDateToCalendarDay(LocalDate localDate, Calendar calendar) {
