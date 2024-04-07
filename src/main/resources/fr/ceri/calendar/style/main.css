@@ -46,3 +46,7 @@
 .dark .circle {
     -fx-fill: #19ff00;
 }
+
+.dark .context-menu {
+    -fx-background-color: #777;
+}
